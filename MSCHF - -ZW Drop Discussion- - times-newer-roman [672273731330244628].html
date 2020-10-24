@@ -1,0 +1,1231 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>MSCHF - times-newer-roman</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+
+    <style>
+        /* General */
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-300.woff);
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-400.woff);
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-500.woff);
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-600.woff);
+    font-weight: 600;
+}
+
+@font-face {
+    font-family: Whitney;
+    src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-700.woff);
+    font-weight: 700;
+}
+
+body {
+    font-family: "Whitney", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 17px;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+img {
+    object-fit: contain;
+}
+
+.markdown {
+    max-width: 100%;
+    white-space: pre-wrap;
+    line-height: 1.3;
+    overflow-wrap: break-word;
+}
+
+.spoiler {
+    width: fit-content;
+}
+
+.spoiler--hidden {
+    cursor: pointer;
+}
+
+.spoiler-text {
+    border-radius: 3px;
+}
+
+.spoiler--hidden .spoiler-text {
+    color: rgba(0, 0, 0, 0);
+}
+
+.spoiler--hidden .spoiler-text::selection {
+    color: rgba(0, 0, 0, 0);
+}
+
+.spoiler-image {
+    position: relative;
+    overflow: hidden;
+    border-radius: 3px;
+}
+
+.spoiler--hidden .spoiler-image {
+    box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+.spoiler--hidden .spoiler-image img {
+    filter: blur(44px);
+}
+
+.spoiler--hidden .spoiler-image:after {
+    content: "SPOILER";
+    color: #dcddde;
+    background-color: rgba(0, 0, 0, 0.6);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: 600;
+    padding: 0.5em 0.7em;
+    border-radius: 20px;
+    letter-spacing: 0.05em;
+    font-size: 0.9em;
+}
+
+.spoiler--hidden:hover .spoiler-image:after {
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.9);
+}
+
+.quote {
+    margin: 0.1em 0;
+    padding-left: 0.6em;
+    border-left: 4px solid;
+    border-radius: 3px;
+}
+
+.pre {
+    font-family: "Consolas", "Courier New", Courier, monospace;
+}
+
+.pre--multiline {
+    margin-top: 0.25em;
+    padding: 0.5em;
+    border: 2px solid;
+    border-radius: 5px;
+}
+
+.pre--inline {
+    padding: 2px;
+    border-radius: 3px;
+    font-size: 0.85em;
+}
+
+.mention {
+    border-radius: 3px;
+    padding: 0 2px;
+    color: #7289da;
+    background: rgba(114, 137, 218, .1);
+    font-weight: 500;
+}
+
+.emoji {
+    width: 1.25em;
+    height: 1.25em;
+    margin: 0 0.06em;
+    vertical-align: -0.4em;
+}
+
+.emoji--small {
+    width: 1em;
+    height: 1em;
+}
+
+.emoji--large {
+    width: 2.8em;
+    height: 2.8em;
+}
+
+/* Preamble */
+
+.preamble {
+    display: grid;
+    margin: 0 0.3em 0.6em 0.3em;
+    max-width: 100%;
+    grid-template-columns: auto 1fr;
+}
+
+.preamble__guild-icon-container {
+    grid-column: 1;
+}
+
+.preamble__guild-icon {
+    max-width: 88px;
+    max-height: 88px;
+}
+
+.preamble__entries-container {
+    grid-column: 2;
+    margin-left: 0.6em;
+}
+
+.preamble__entry {
+    font-size: 1.4em;
+}
+
+.preamble__entry--small {
+    font-size: 1em;
+}
+
+/* Chatlog */
+
+.chatlog {
+    max-width: 100%;
+}
+
+.chatlog__message-group {
+    display: grid;
+    margin: 0 0.6em;
+    padding: 0.9em 0;
+    border-top: 1px solid;
+    grid-template-columns: auto 1fr;
+}
+
+.chatlog__author-avatar-container {
+    grid-column: 1;
+    width: 40px;
+    height: 40px;
+}
+
+.chatlog__author-avatar {
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+}
+
+.chatlog__messages {
+    grid-column: 2;
+    margin-left: 1.2em;
+    min-width: 50%;
+}
+
+.chatlog__author-name {
+    font-weight: 500;
+}
+
+.chatlog__timestamp {
+    margin-left: 0.3em;
+    font-size: 0.75em;
+}
+
+.chatlog__message {
+    padding: 0.1em 0.3em;
+    margin: 0 -0.3em;
+    background-color: transparent;
+    transition: background-color 1s ease;
+}
+
+.chatlog__content {
+    font-size: 0.95em;
+    word-wrap: break-word;
+}
+
+.chatlog__edited-timestamp {
+    margin-left: 0.15em;
+    font-size: 0.8em;
+}
+
+.chatlog__attachment {
+    margin-top: 0.3em;
+}
+
+.chatlog__attachment-thumbnail {
+    vertical-align: top;
+    max-width: 45vw;
+    max-height: 500px;
+    border-radius: 3px;
+}
+
+.chatlog__embed {
+    display: flex;
+    margin-top: 0.3em;
+    max-width: 520px;
+}
+
+.chatlog__embed-color-pill {
+    flex-shrink: 0;
+    width: 0.25em;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+
+.chatlog__embed-content-container {
+    display: flex;
+    flex-direction: column;
+    padding: 0.5em 0.6em;
+    border: 1px solid;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+
+.chatlog__embed-content {
+    display: flex;
+    width: 100%;
+}
+
+.chatlog__embed-text {
+    flex: 1;
+}
+
+.chatlog__embed-author {
+    display: flex;
+    margin-bottom: 0.3em;
+    align-items: center;
+}
+
+.chatlog__embed-author-icon {
+    margin-right: 0.5em;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+}
+
+.chatlog__embed-author-name {
+    font-size: 0.875em;
+    font-weight: 600;
+}
+
+.chatlog__embed-title {
+    margin-bottom: 0.2em;
+    font-size: 0.875em;
+    font-weight: 600;
+}
+
+.chatlog__embed-description {
+    font-weight: 500;
+    font-size: 0.85em;
+}
+
+.chatlog__embed-fields {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.chatlog__embed-field {
+    flex: 0;
+    min-width: 100%;
+    max-width: 506px;
+    padding-top: 0.6em;
+    font-size: 0.875em;
+}
+
+.chatlog__embed-field--inline {
+    flex: 1;
+    flex-basis: auto;
+    min-width: 150px;
+}
+
+.chatlog__embed-field-name {
+    margin-bottom: 0.2em;
+    font-weight: 600;
+}
+
+.chatlog__embed-field-value {
+    font-weight: 500;
+}
+
+.chatlog__embed-thumbnail {
+    flex: 0;
+    margin-left: 1.2em;
+    max-width: 80px;
+    max-height: 80px;
+    border-radius: 3px;
+}
+
+.chatlog__embed-image-container {
+    margin-top: 0.6em;
+}
+
+.chatlog__embed-image {
+    max-width: 500px;
+    max-height: 400px;
+    border-radius: 3px;
+}
+
+.chatlog__embed-footer {
+    margin-top: 0.6em;
+}
+
+.chatlog__embed-footer-icon {
+    margin-right: 0.2em;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    vertical-align: middle;
+}
+
+.chatlog__embed-footer-text {
+    font-size: 0.75em;
+    font-weight: 500;
+}
+
+.chatlog__reactions {
+    display: flex;
+}
+
+.chatlog__reaction {
+    display: flex;
+    align-items: center;
+    margin: 0.35em 0.1em 0.1em 0.1em;
+    padding: 0.2em 0.35em;
+    border-radius: 3px;
+}
+
+.chatlog__reaction-count {
+    min-width: 9px;
+    margin-left: 0.35em;
+    font-size: 0.875em;
+}
+
+.chatlog__bot-tag {
+    position: relative;
+    top: -.2em;
+    margin-left: 0.3em;
+    padding: 0.05em 0.3em;
+    border-radius: 3px;
+    vertical-align: middle;
+    line-height: 1.3;
+    background: #7289da;
+    color: #ffffff;
+    font-size: 0.625em;
+    font-weight: 500;
+}
+
+/* Postamble */
+
+.postamble {
+    margin: 1.4em 0.3em 0.6em 0.3em;
+    padding: 1em;
+    border-top: 1px solid;
+}
+    </style>
+    <style>
+        /* General */
+
+body {
+    background-color: #36393e;
+    color: #dcddde;
+}
+
+a {
+    color: #0096cf;
+}
+
+.spoiler-text {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.spoiler--hidden .spoiler-text {
+    background-color: #202225;
+}
+
+.spoiler--hidden:hover .spoiler-text {
+    background-color: rgba(32, 34, 37, 0.8);
+}
+
+.quote {
+    border-color: #4f545c;
+}
+
+.pre {
+    background-color: #2f3136 !important;
+}
+
+.pre--multiline {
+    border-color: #282b30 !important;
+    color: #b9bbbe !important;
+}
+
+/* === Preamble === */
+
+.preamble__entry {
+    color: #ffffff;
+}
+
+/* Chatlog */
+
+.chatlog__message-group {
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.chatlog__author-name {
+    color: #ffffff;
+}
+
+.chatlog__timestamp {
+    color: rgba(255, 255, 255, 0.2);
+}
+
+.chatlog__message--highlighted {
+    background-color: rgba(114, 137, 218, 0.2) !important;
+}
+
+.chatlog__message--pinned {
+    background-color: rgba(249, 168, 37, 0.05);
+}
+
+.chatlog__edited-timestamp {
+    color: rgba(255, 255, 255, 0.2);
+}
+
+.chatlog__embed-color-pill--default {
+    background-color: rgba(79, 84, 92, 1);
+}
+
+.chatlog__embed-content-container {
+    background-color: rgba(46, 48, 54, 0.3);
+    border-color: rgba(46, 48, 54, 0.6);
+}
+
+.chatlog__embed-author-name {
+    color: #ffffff;
+}
+
+.chatlog__embed-author-name-link {
+    color: #ffffff;
+}
+
+.chatlog__embed-title {
+    color: #ffffff;
+}
+
+.chatlog__embed-description {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.chatlog__embed-field-name {
+    color: #ffffff;
+}
+
+.chatlog__embed-field-value {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.chatlog__embed-footer {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.chatlog__reaction {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.chatlog__reaction-count {
+    color: rgba(255, 255, 255, 0.3);
+}
+
+/* Postamble */
+
+.postamble {
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.postamble__entry {
+    color: #ffffff;
+}
+    </style>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/solarized-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.pre--multiline').forEach(block => hljs.highlightBlock(block));
+        });
+    </script>
+
+    <script>
+        function scrollToMessage(event, id) {
+            var element = document.getElementById('message-' + id);
+
+            if (element) {
+                event.preventDefault();
+
+                element.classList.add('chatlog__message--highlighted');
+
+                window.scrollTo({
+                    top: element.getBoundingClientRect().top - document.body.getBoundingClientRect().top - (window.innerHeight / 2),
+                    behavior: 'smooth'
+                });
+
+                window.setTimeout(function() {
+                    element.classList.remove('chatlog__message--highlighted');
+                }, 2000);
+            }
+        }
+
+        function showSpoiler(event, element) {
+            if (element && element.classList.contains('spoiler--hidden')) {
+                event.preventDefault();
+                element.classList.remove('spoiler--hidden');
+            }
+        }
+    </script>
+</head>
+<body>
+
+<div class="preamble">
+    <div class="preamble__guild-icon-container">
+        <img class="preamble__guild-icon" src="https://cdn.discordapp.com/icons/671536906290331676/7840cd9ac610b9f86f9b6832fba5cfcf.png" alt="Guild icon">
+    </div>
+    <div class="preamble__entries-container">
+        <div class="preamble__entry">MSCHF</div>
+        <div class="preamble__entry">-ZW Drop Discussion- / times-newer-roman</div>
+
+
+    </div>
+</div>
+
+<div class="chatlog">
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/215686155419516929/41e5fe83eed7c5b7a9679a6e8320c232.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="ArctiK#0570" data-user-id="215686155419516929" style="color: rgb(53,133,255)">Jarrett</span>
+
+
+        <span class="chatlog__timestamp">29-Jan-20 10:55 PM</span>
+
+            <div class="chatlog__message " data-message-id="672288860851666986" id="message-672288860851666986">
+                <div class="chatlog__content">
+                    <div class="markdown">Declaring myself Supreme Leader of the Times Newer Order <span class="chatlog__edited-timestamp" title="29-Jan-20 11:25 PM">(edited)</span></div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="672289734558613505" id="message-672289734558613505">
+                <div class="chatlog__content">
+                    <div class="markdown"><a href="https://timesnewerroman.com/">https://timesnewerroman.com/</a> </div>
+                </div>
+
+
+                    <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+
+                        <div class="chatlog__embed-content-container">
+                            <div class="chatlog__embed-content">
+                                <div class="chatlog__embed-text">
+
+                                        <div class="chatlog__embed-title">
+                                                <a class="chatlog__embed-title-link" href="https://timesnewerroman.com/">
+                                                    <div class="markdown">Times Newer Roman</div>
+                                                </a>
+                                        </div>
+
+                                        <div class="chatlog__embed-description">
+                                            <div class="markdown">A font like Times New Roman, except each character is 5-10% wider.</div>
+                                        </div>
+
+                                </div>
+
+                                    <div class="chatlog__embed-thumbnail-container">
+                                        <a class="chatlog__embed-thumbnail-link" href="https://timesnewerroman.com/assets/sharecard.png">
+                                            <img class="chatlog__embed-thumbnail" src="https://timesnewerroman.com/assets/sharecard.png" alt="Thumbnail">
+                                        </a>
+                                    </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/244120219134459904/97d92d7d453da153526274d020112925.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="colm#3319" data-user-id="244120219134459904" style="color: rgb(255,0,0)">colm1312</span>
+
+
+        <span class="chatlog__timestamp">30-Jan-20 03:58 PM</span>
+
+            <div class="chatlog__message " data-message-id="672546202843349063" id="message-672546202843349063">
+                <div class="chatlog__content">
+                    <div class="markdown">Times Newer Roman is here. </div>
+                </div>
+
+                    <div class="chatlog__attachment">
+                            <a href="https://cdn.discordapp.com/attachments/672273731330244628/672546202839023628/TimesNewerRoman.otf">
+Attachment: TimesNewerRoman.otf (93.29 KB)                            </a>
+                    </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="672546282086203412" id="message-672546282086203412">
+                <div class="chatlog__content">
+                    <div class="markdown">It&#39;s on a simple download page if you give your number. <a href="https://timesnewerroman.com/download.html">https://timesnewerroman.com/download.html</a> </div>
+                </div>
+
+
+                    <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+
+                        <div class="chatlog__embed-content-container">
+                            <div class="chatlog__embed-content">
+                                <div class="chatlog__embed-text">
+
+                                        <div class="chatlog__embed-title">
+                                                <a class="chatlog__embed-title-link" href="https://timesnewerroman.com/download.html">
+                                                    <div class="markdown">Times Newer Roman</div>
+                                                </a>
+                                        </div>
+
+                                        <div class="chatlog__embed-description">
+                                            <div class="markdown">A font like Times New Roman, except each character is 5-10% wider.</div>
+                                        </div>
+
+                                </div>
+
+                                    <div class="chatlog__embed-thumbnail-container">
+                                        <a class="chatlog__embed-thumbnail-link" href="https://timesnewerroman.com/assets/sharecard.png">
+                                            <img class="chatlog__embed-thumbnail" src="https://timesnewerroman.com/assets/sharecard.png" alt="Thumbnail">
+                                        </a>
+                                    </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+            </div>
+            <div class="chatlog__message " data-message-id="672546396674588682" id="message-672546396674588682">
+                <div class="chatlog__content">
+                    <div class="markdown">the TNR website features prominent use of a smiley... </div>
+                </div>
+
+                    <div class="chatlog__attachment">
+                            <a href="https://cdn.discordapp.com/attachments/672273731330244628/672546396523462656/unknown.png">
+                                    <img class="chatlog__attachment-thumbnail" src="https://cdn.discordapp.com/attachments/672273731330244628/672546396523462656/unknown.png" alt="Attachment">
+                            </a>
+                    </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="672546494787878930" id="message-672546494787878930">
+                <div class="chatlog__content">
+                    <div class="markdown">but the actual smiley face included in the font is... creepy. </div>
+                </div>
+
+                    <div class="chatlog__attachment">
+                            <a href="https://cdn.discordapp.com/attachments/672273731330244628/672546494427037697/unknown.png">
+                                    <img class="chatlog__attachment-thumbnail" src="https://cdn.discordapp.com/attachments/672273731330244628/672546494427037697/unknown.png" alt="Attachment">
+                            </a>
+                    </div>
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/190991188357021706/a_26255b2bb367e7ab36e658215ffb8746.gif" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Bazoop#2893" data-user-id="190991188357021706" style="">Doubting Thomas</span>
+
+
+        <span class="chatlog__timestamp">30-Jan-20 04:01 PM</span>
+
+            <div class="chatlog__message " data-message-id="672546943922208798" id="message-672546943922208798">
+                <div class="chatlog__content">
+                    <div class="markdown">Wanna weigh in here </div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="672547065036800011" id="message-672547065036800011">
+                <div class="chatlog__content">
+                    <div class="markdown">Does TNR have older/different versions? </div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="672547563681087499" id="message-672547563681087499">
+                <div class="chatlog__content">
+                    <div class="markdown"><a href="https://tenor.com/view/monstersinc-sully-mike-door-put-that-thing-back-gif-4553929">https://tenor.com/view/monstersinc-sully-mike-door-put-that-thing-back-gif-4553929</a> </div>
+                </div>
+
+
+                    <div class="chatlog__embed">
+                            <div class="chatlog__embed-color-pill chatlog__embed-color-pill--default"></div>
+
+                        <div class="chatlog__embed-content-container">
+                            <div class="chatlog__embed-content">
+                                <div class="chatlog__embed-text">
+
+
+
+                                </div>
+
+                                    <div class="chatlog__embed-thumbnail-container">
+                                        <a class="chatlog__embed-thumbnail-link" href="https://media.tenor.co/images/24ce919ad765c4dad21dea1dc4e57ac5/raw">
+                                            <img class="chatlog__embed-thumbnail" src="https://media.tenor.co/images/24ce919ad765c4dad21dea1dc4e57ac5/raw" alt="Thumbnail">
+                                        </a>
+                                    </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/244120219134459904/97d92d7d453da153526274d020112925.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="colm#3319" data-user-id="244120219134459904" style="color: rgb(255,0,0)">colm1312</span>
+
+
+        <span class="chatlog__timestamp">30-Jan-20 04:03 PM</span>
+
+            <div class="chatlog__message " data-message-id="672547573143306248" id="message-672547573143306248">
+                <div class="chatlog__content">
+                    <div class="markdown">I&#39;m not sure. It&#39;s licenced by the GPL (which is weird for fonts!) and the licence text is generic so doesn&#39;t mention multiple versions </div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="672547713451163679" id="message-672547713451163679">
+                <div class="chatlog__content">
+                    <div class="markdown">That said </div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="672547761261903910" id="message-672547761261903910">
+                <div class="chatlog__content">
+                    <div class="markdown">I wonder if an older Times New Roman has the weird face </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/190991188357021706/a_26255b2bb367e7ab36e658215ffb8746.gif" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Bazoop#2893" data-user-id="190991188357021706" style="">Doubting Thomas</span>
+
+
+        <span class="chatlog__timestamp">30-Jan-20 04:04 PM</span>
+
+            <div class="chatlog__message " data-message-id="672547802953285652" id="message-672547802953285652">
+                <div class="chatlog__content">
+                    <div class="markdown">Yeah, thats what I meant sorry </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/244120219134459904/97d92d7d453da153526274d020112925.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="colm#3319" data-user-id="244120219134459904" style="color: rgb(255,0,0)">colm1312</span>
+
+
+        <span class="chatlog__timestamp">30-Jan-20 04:05 PM</span>
+
+            <div class="chatlog__message " data-message-id="672547845689049108" id="message-672547845689049108">
+                <div class="chatlog__content">
+                    <div class="markdown">sorry both of them being &quot;TNR&quot; is weird </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/190991188357021706/a_26255b2bb367e7ab36e658215ffb8746.gif" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Bazoop#2893" data-user-id="190991188357021706" style="">Doubting Thomas</span>
+
+
+        <span class="chatlog__timestamp">30-Jan-20 04:05 PM</span>
+
+            <div class="chatlog__message " data-message-id="672547893399257149" id="message-672547893399257149">
+                <div class="chatlog__content">
+                    <div class="markdown">I should have been more clear </div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="672547978589896705" id="message-672547978589896705">
+                <div class="chatlog__content">
+                    <div class="markdown">If it matches an older times new roman, then false alarm </div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="672547994561806356" id="message-672547994561806356">
+                <div class="chatlog__content">
+                    <div class="markdown">if it doesn&#39;t, well.. </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/244120219134459904/97d92d7d453da153526274d020112925.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="colm#3319" data-user-id="244120219134459904" style="color: rgb(255,0,0)">colm1312</span>
+
+
+        <span class="chatlog__timestamp">30-Jan-20 04:06 PM</span>
+
+            <div class="chatlog__message " data-message-id="672548145997152257" id="message-672548145997152257">
+                <div class="chatlog__content">
+                    <div class="markdown">I&#39;d have to get a virtual machine running an old windows or something </div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="672548725285060609" id="message-672548725285060609">
+                <div class="chatlog__content">
+                    <div class="markdown"><a href="https://win95.ajf.me/">https://win95.ajf.me/</a> </div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="672549422843953162" id="message-672549422843953162">
+                <div class="chatlog__content">
+                    <div class="markdown">it turns out trying to run Windows in your browser is... slow </div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="672550394773241866" id="message-672550394773241866">
+                <div class="chatlog__content">
+                    <div class="markdown">times new roman did not have this character in 1995 </div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="672550728337719327" id="message-672550728337719327">
+                <div class="chatlog__content">
+                    <div class="markdown">or 98 </div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="672551610160906291" id="message-672551610160906291">
+                <div class="chatlog__content">
+                    <div class="markdown"> </div>
+                </div>
+
+                    <div class="chatlog__attachment">
+                            <a href="https://cdn.discordapp.com/attachments/672273731330244628/672551609921699840/unknown.png">
+                                    <img class="chatlog__attachment-thumbnail" src="https://cdn.discordapp.com/attachments/672273731330244628/672551609921699840/unknown.png" alt="Attachment">
+                            </a>
+                    </div>
+
+
+                    <div class="chatlog__reactions">
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="&#129326;" title="&#129326;" src="https://twemoji.maxcdn.com/2/72x72/1f92e.png">
+                                <span class="chatlog__reaction-count">1</span>
+                            </div>
+                    </div>
+            </div>
+            <div class="chatlog__message " data-message-id="672551667681591320" id="message-672551667681591320">
+                <div class="chatlog__content">
+                    <div class="markdown">Update from 2000: Times New Roman&#39;s default smiley face is not that fucking creepy thing </div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="672551744483491850" id="message-672551744483491850">
+                <div class="chatlog__content">
+                    <div class="markdown"><a href="https://bellard.org/jslinux/vm.html?url=https://bellard.org/jslinux/win2k.cfg&mem=192&graphic=1&w=1024&h=768">https://bellard.org/jslinux/vm.html?url=https://bellard.org/jslinux/win2k.cfg&amp;mem=192&amp;graphic=1&amp;w=1024&amp;h=768</a> </div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="672551791853961241" id="message-672551791853961241">
+                <div class="chatlog__content">
+                    <div class="markdown">I cannot believe you can run Windows 2000 in your browser today </div>
+                </div>
+
+
+
+                    <div class="chatlog__reactions">
+                            <div class="chatlog__reaction">
+                                <img class="emoji emoji--small" alt="&#128077;" title="&#128077;" src="https://twemoji.maxcdn.com/2/72x72/1f44d.png">
+                                <span class="chatlog__reaction-count">3</span>
+                            </div>
+                    </div>
+            </div>
+            <div class="chatlog__message " data-message-id="672551806508859465" id="message-672551806508859465">
+                <div class="chatlog__content">
+                    <div class="markdown">it&#39;s cute </div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="672552224945078293" id="message-672552224945078293">
+                <div class="chatlog__content">
+                    <div class="markdown">in conclusion: </div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="672553145020448779" id="message-672553145020448779">
+                <div class="chatlog__content">
+                    <div class="markdown">* the text to look through previous drops often comes with a smiley
+* times newer roman&#39;s website features smileys prominently
+* the font contains a... visually distinctive smiley face
+* it does not appear to come from any known version of Times New Roman dating back to when the symbol first appeared in it
+* Times Newer Roman contains no other strangeness I can identify
+* viewing the strange smiley glyph up close I can&#39;t say it leads anywhere, although the crescent smile is quite <span class="mention">#bull-and-moon</span> ... </div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="672553791090065458" id="message-672553791090065458">
+                <div class="chatlog__content">
+                    <div class="markdown"> </div>
+                </div>
+
+                    <div class="chatlog__attachment">
+                            <a href="https://cdn.discordapp.com/attachments/672273731330244628/672553790863441948/unknown.png">
+                                    <img class="chatlog__attachment-thumbnail" src="https://cdn.discordapp.com/attachments/672273731330244628/672553790863441948/unknown.png" alt="Attachment">
+                            </a>
+                    </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="672553868017532931" id="message-672553868017532931">
+                <div class="chatlog__content">
+                    <div class="markdown">Bull and Moon logo vs Strange TNR Smiley is very much &quot;eh... I guess&quot; </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/327496560059613205/3cc78d7f55d1fdf7f1339f7cffbfa1c5.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="clarabellum#2542" data-user-id="327496560059613205" style="">clarabellum</span>
+
+
+        <span class="chatlog__timestamp">30-Jan-20 04:39 PM</span>
+
+            <div class="chatlog__message " data-message-id="672556439486595083" id="message-672556439486595083">
+                <div class="chatlog__content">
+                    <div class="markdown">popping in to say times newer roman is actually based on a different font </div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="672556570927824896" id="message-672556570927824896">
+                <div class="chatlog__content">
+                    <div class="markdown">someone should look up the smiley on nimbus roman </div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="672556594155880491" id="message-672556594155880491">
+                <div class="chatlog__content">
+                    <div class="markdown">which is what times newer roman is forked from </div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="672556605799137320" id="message-672556605799137320">
+                <div class="chatlog__content">
+                    <div class="markdown">for copyright reasons </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/244120219134459904/97d92d7d453da153526274d020112925.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="colm#3319" data-user-id="244120219134459904" style="color: rgb(255,0,0)">colm1312</span>
+
+
+        <span class="chatlog__timestamp">30-Jan-20 04:41 PM</span>
+
+            <div class="chatlog__message " data-message-id="672556914554699786" id="message-672556914554699786">
+                <div class="chatlog__content">
+                    <div class="markdown"><a href="http://zarniwhoop.uk/files/PDF-contents/NimbusRomNo9L-contents.pdf">http://zarniwhoop.uk/files/PDF-contents/NimbusRomNo9L-contents.pdf</a> </div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="672556957709762580" id="message-672556957709762580">
+                <div class="chatlog__content">
+                    <div class="markdown">good spot! </div>
+                </div>
+
+                    <div class="chatlog__attachment">
+                            <a href="https://cdn.discordapp.com/attachments/672273731330244628/672556957470556190/unknown.png">
+                                    <img class="chatlog__attachment-thumbnail" src="https://cdn.discordapp.com/attachments/672273731330244628/672556957470556190/unknown.png" alt="Attachment">
+                            </a>
+                    </div>
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/327496560059613205/3cc78d7f55d1fdf7f1339f7cffbfa1c5.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="clarabellum#2542" data-user-id="327496560059613205" style="">clarabellum</span>
+
+
+        <span class="chatlog__timestamp">30-Jan-20 04:41 PM</span>
+
+            <div class="chatlog__message " data-message-id="672557000785133591" id="message-672557000785133591">
+                <div class="chatlog__content">
+                    <div class="markdown">there we go </div>
+                </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="672557036583780362" id="message-672557036583780362">
+                <div class="chatlog__content">
+                    <div class="markdown">thanks haha </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+<div class="chatlog__message-group">
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/244120219134459904/97d92d7d453da153526274d020112925.png" alt="Avatar">
+    </div>
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="colm#3319" data-user-id="244120219134459904" style="color: rgb(255,0,0)">colm1312</span>
+
+
+        <span class="chatlog__timestamp">30-Jan-20 09:10 PM</span>
+
+            <div class="chatlog__message " data-message-id="672624623929524275" id="message-672624623929524275">
+                <div class="chatlog__content">
+                    <div class="markdown">so there&#39;s no interesting glyphs in TNR, no interesting oddities about the website and the phone number for it is reused with other &quot;notification&quot; numbers like bull &amp; moon&#39;s. I&#39;d call it a dead-end </div>
+                </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+</div>
+
+<div class="postamble">
+    <div class="postamble__entry">Exported 40 message(s)</div>
+</div>
+
+</body>
+</html>
